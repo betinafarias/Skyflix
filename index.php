@@ -32,7 +32,7 @@
       <div class="row">
         <div class="col s12">
          
-            <h3 class="center light-blue-text">Catálogo de filmes</h3>
+            <h3 class="center ">Catálogo de filmes</h3><br>
 
 
             <div class="row">
