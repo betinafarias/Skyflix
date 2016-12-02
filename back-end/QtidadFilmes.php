@@ -3,6 +3,7 @@
      $resultado = mysql_query( "SELECT count(*) FROM filmes" );
      $array = mysql_fetch_array( $resultado );  // ==> Será só um resultado...
      
-     $array[0]; // total de filmes :D
+     echo $array[0]; // total de filmes :D
+
 
 ?>

@@ -37,7 +37,6 @@
          
 
           <?php
-
           if (!isset($_POST['action'])) {
             $_POST['action'] = "";
           }
@@ -46,6 +45,12 @@
             case "":
         ?>
             <h3 class="center ">Catálogo de filmes</h3><br>
+            <b>Quantidade de filmes:</b> 
+            <?php
+            include('back-end/QtidadFilmes.php');
+            ?>
+<br>
+<br>
 
 
             <div class="row">
