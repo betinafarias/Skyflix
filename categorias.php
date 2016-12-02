@@ -24,6 +24,13 @@
     </div>
   </nav>
 
+  <?php
+
+  if (!isset($_POST['action'])) {
+    $_POST['action'] = "";
+  }
+
+  ?>
 
   <div class="content container" style="margin-left: 400px;">
     <div class="section">
@@ -32,7 +39,103 @@
       <div class="row">
         <div class="col s12">
          
-            <h3 class="center ">Catálogo de filmes</h3><br>
+        <h3 class="center ">Categorias</h3><br>
+
+        <?php
+        //Switch de interfaces
+        switch (($_POST['action'])) {
+
+
+        case "novo_categoria":
+          include('back-end/InserirCateg.php');
+          header('location:categorias.php');
+          break;  
+
+
+        case "excluir_categoria":
+          include('back-end/remocaoCategoria.php');
+          header('location:categorias.php');
+          break;  
+
+
+
+        case "":
+?>
+
+        <form action="" method="post" name="novo_categoria">
+          <ul class="collapsible" data-collapsible="accordion">
+            <li>
+              <div class="collapsible-header teal lighten-2 white-text"><i class="material-icons">add</i>Adicionar categoria</div>
+              <div class="collapsible-body ">             
+                <div class="row padding">
+                  <div class="input-field col s12 padding">
+                    <input name="nome_categoria" type="text" class="validate">
+                    <label for="nome_categoria">Nome</label>
+                  </div>
+                </div>
+
+                <div class="row padding center">
+                    <a onclick="novo_categoria.submit();" class="waves-effect waves-light btn-large">Cadastrar</a>
+                </div>
+                <input type="hidden" name="action" value="novo_categoria">
+
+              </div>
+            </li>
+
+          </ul>
+        </form>
+
+        <br><br>
+
+
+
+
+        <form action="categorias.php" method="post" name="categorias">
+          <table>
+            <thead>
+              <tr>
+                  <th data-field="nome">Nome</th>
+                  <th data-field="excluir">Excluir</th>
+              </tr>
+            </thead>
+
+            <tbody>
+<?php
+            include('back-end/mostrarCat.php');
+
+
+           while($mostra_dados = mysql_fetch_array($pega_dados)){
+               $nome_categoria= $mostra_dados['nome_categoria'];
+?>
+
+              <tr>
+
+                <td><?=$nome_categoria?></td>
+                <td><a class="cursor" onclick="document.categorias.action.value='excluir_categoria'; document.categorias.nome_categoria.value='<?=$nome_categoria?>'; categorias.submit();">Excluir</a></td>
+              </tr>
+<?php
+           }
+
+?>
+            </tbody>
+          </table>      
+          <input type="hidden" name="action" value="">
+          <input type="hidden" name="nome_categoria" value="">
+        </form>
+
+        <br><br>
+
+<?php
+            break;
+
+                  
+          
+          default:
+            # code...
+            break;
+        }
+
+        ?>
 
 
        
@@ -49,13 +152,16 @@
   include('nav.php');
   ?>
 
+
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
 
   <script type="text/javascript">
-(function($){
+
+
+     (function($){
   $(function(){
 
     $('.button-collapse').sideNav();
@@ -63,6 +169,7 @@
 
   }); // end of document ready
 })(jQuery); // end of jQuery name space
+
   </script>
 
 
