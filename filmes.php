@@ -77,7 +77,31 @@
           <ul class="collapsible" data-collapsible="accordion">
             <li>
               <div class="collapsible-header teal lighten-2 white-text"><i class="material-icons">add</i>Adicionar filme</div>
-              <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+              <div class="collapsible-body ">
+                <div class="row padding">
+                  <div class="input-field col s12 padding">
+                    <input id="titulo" type="text" class="validate">
+                    <label for="titulo">Título</label>
+                  </div>
+                </div>
+                <div class="row padding">
+                  <div class="input-field col s12">
+                    <select>
+                      <option value="" disabled selected>Selecione uma categoria</option>
+                      <option value="1">Option 1</option>
+                      <option value="2">Option 2</option>
+                      <option value="3">Option 3</option>
+                    </select>
+                    <label>Categoria</label>
+                  </div>
+                </div>
+
+                <div class="row padding center">
+                    <a class="waves-effect waves-light btn-large">Cadastrar</a>
+                </div>
+                
+
+              </div>
             </li>
 
           </ul>
@@ -139,7 +163,16 @@
   <script src="js/init.js"></script>
 
   <script type="text/javascript">
-     $(".button-collapse").sideNav();
+
+
+     (function($){
+  $(function(){
+
+    $('.button-collapse').sideNav();
+    $('select').material_select();
+
+  }); // end of document ready
+})(jQuery); // end of jQuery name space
 
   </script>
 

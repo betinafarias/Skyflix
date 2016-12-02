@@ -55,8 +55,14 @@
   <script src="js/init.js"></script>
 
   <script type="text/javascript">
-     $(".button-collapse").sideNav();
+(function($){
+  $(function(){
 
+    $('.button-collapse').sideNav();
+    $('select').material_select();
+
+  }); // end of document ready
+})(jQuery); // end of jQuery name space
   </script>
 
 
