@@ -25,6 +25,14 @@
   </nav>
 
 
+  <?php
+
+  if (!isset($_POST['action'])) {
+    $_POST['action'] = "";
+  }
+
+  ?>
+
   <div class="content container" style="margin-left: 400px;">
     <div class="section">
 
@@ -33,8 +41,8 @@
         <div class="col s12">
          
             <h3 class="center ">Catálogo de filmes</h3><br>
-			
-			  <?php
+      
+        <?php
         //Switch de interfaces
         switch (($_POST['action'])) {
         case "novo_ator":
@@ -84,8 +92,8 @@
                     <label>Categoria</label>
                   </div>
                 </div>
-				
-				<div class="row padding center">
+        
+        <div class="row padding center">
                     <a onclick="novo_ator.submit();" class="waves-effect waves-light btn-large">Cadastrar</a>
                 </div>
                 <input type="hidden" name="action" value="novo_ator">
@@ -97,8 +105,8 @@
         </form>
 
         <br><br>
-		
-		 <form action="" method="post" name="atores">
+    
+     <form action="" method="post" name="atores">
           <table>
             <thead>
               <tr>
@@ -106,12 +114,13 @@
                   <th data-field="name">Info</th>
                   <th data-field="price">Categoria</th>
                   <th data-field="price">Excluir</th>
+                  <th data-field="price">Alterar</th>
               </tr>
             </thead>
 
             <tbody>
-			
-			<?php
+      
+      <?php
             include('back-end/MostrarAtor.php');
            while($mostra_dados = mysql_fetch_array($pega_dados)){
                $nome_ator = $mostra_dados['nome_ator'];
@@ -135,7 +144,7 @@
         </form>
 
         <br><br>
-		
+    
 <div class="row padding">
                   <div class="input-field col s12">
 
@@ -154,8 +163,8 @@
                                     
                       ?>
                     </select>
-					
-					 <label>Categoria</label>
+          
+           <label>Categoria</label>
                   </div>
                 </div>
 
@@ -185,6 +194,8 @@
 
 
   <?php
+   }
+ }
   include('nav.php');
   ?>
 
