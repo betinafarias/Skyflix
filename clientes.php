@@ -50,6 +50,13 @@
           include('back-end/remocaoCliente.php');
           header('location:clientes.php');
           break;  
+
+        case "alterar":
+        
+         include('back-end/alteracaoCliente.php');
+          //header('location:clientes.php');
+          break; 
+
         case "":
 ?>
 
