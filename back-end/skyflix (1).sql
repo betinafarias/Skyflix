@@ -26,7 +26,7 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `verifyDates` (IN `CurDate` DATE)  NO SQL
+CREATE DEFINER IF NOT EXISTS =`root`@`localhost` PROCEDURE `verifyDates` (IN `CurDate` DATE)  NO SQL
 SELECT *FROM locacao 
 WHERE GETDATE() > locacao.dateLocacao$$
 

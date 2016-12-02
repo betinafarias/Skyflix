@@ -25,11 +25,9 @@
   </nav>
 
   <?php
-
   if (!isset($_POST['action'])) {
     $_POST['action'] = "";
   }
-
   ?>
 
   <div class="content container" style="margin-left: 400px;">
@@ -44,21 +42,14 @@
         <?php
         //Switch de interfaces
         switch (($_POST['action'])) {
-
-
         case "novo_filme":
           include('back-end/InserirFil.php');
           header('location:filmes.php');
           break;  
-
-
         case "excluir_filme":
           include('back-end/remocaoFilme.php');
           header('location:filmes.php');
           break;  
-
-
-
         case "":
 ?>
 
@@ -87,7 +78,6 @@
 
                       <?php
                       include('back-end/mostrarCat.php');
-
                        while($mostra_dados = mysql_fetch_array($pega_dados)){
                            $nome_categoria= $mostra_dados['nome_categoria'];
                            ?>
@@ -133,8 +123,6 @@
             <tbody>
 <?php
             include('back-end/MostrarFilm.php');
-
-
            while($mostra_dados = mysql_fetch_array($pega_dados)){
                $cod_filme = $mostra_dados['cod_filme'];
                $titulo  = $mostra_dados['titulo'];
@@ -150,7 +138,6 @@
               </tr>
 <?php
            }
-
 ?>
             </tbody>
           </table>      
@@ -169,9 +156,7 @@
 
 <?php
             break;
-
       
-
           case "alterar_filme":
             echo 'ALTERAR FILME';
 ?><br>
@@ -199,7 +184,6 @@
 
                       <?php
                       include('back-end/mostrarCat.php');
-
                        while($mostra_dados = mysql_fetch_array($pega_dados)){
                            $nome_categoria= $mostra_dados['nome_categoria'];
                            ?>
@@ -234,7 +218,6 @@
             # code...
             break;
         }
-
         ?>
 
 
@@ -259,17 +242,12 @@
   <script src="js/init.js"></script>
 
   <script type="text/javascript">
-
-
      (function($){
   $(function(){
-
     $('.button-collapse').sideNav();
     $('select').material_select();
-
   }); // end of document ready
 })(jQuery); // end of jQuery name space
-
   </script>
 
 
