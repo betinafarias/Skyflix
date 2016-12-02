@@ -25,6 +25,9 @@
   </nav>
 
 
+
+
+
   <div class="content container" style="margin-left: 400px;">
     <div class="section">
 
@@ -32,34 +35,120 @@
       <div class="row">
         <div class="col s12">
          
+
+          <?php
+
+          if (!isset($_POST['action'])) {
+            $_POST['action'] = "";
+          }
+
+          switch ($_POST['action']) {
+            case "":
+        ?>
             <h3 class="center ">Catálogo de filmes</h3><br>
 
 
             <div class="row">
+            <form name="alugar" method="post" >
+<?php
+
+            include('back-end/MostrarFilm.php');
+            while($mostra_dados = mysql_fetch_array($pega_dados)){
+               $cod_filme = $mostra_dados['cod_filme'];
+               $titulo  = $mostra_dados['titulo'];
+               $nome_categoria= $mostra_dados['nome_categoria'];
+?>
+              <!-- CARD -->
               <div class="col m3">
                 <div class="card  grey lighten-4 ">
                   <div class="card-content white-text center">
-                    <span class="card-title light-blue-text">Título filme</span><br>
+                    <span class="card-title light-blue-text"><?=$titulo?></span><br>
                     <i class="large material-icons  light-blue-text">movie</i>
                   </div>
                   <div class="card-content white center">
-                      <b>(COMÉDIA)</b><BR><BR>
+                      <b>(<?=$titulo?>)</b><BR><BR>
                       <b>ATORES:</b> Fulano, Cicrano Beltrano
                   </div>                  
                   <div class="card-action white center">
-                      <a class="waves-effect waves-light btn">Alugar</a>
+                      <a onclick="document.alugar.cod_filme.value=<?=$cod_filme?>; alugar.submit();" class="waves-effect waves-light btn">Alugar</a>
                   </div>
                 </div>
               </div>
+<?php
+            }
+
+?>
+              <input type="hidden" name="cod_filme" value="" />
+              <input type="hidden" name="action" value="alugar" />
+            </form>
 
 
+        <?php
+              break;
 
+            case 'salvar_aluguel':
+                echo "salvarr";
+              include('back-end/inserirLocacao.php');
+              header('location:index.php');            
+        ?>
+
+        <?php
+              break;        
+
+            case 'alugar':
+              $cod_filme = $_POST['cod_filme'];
+        ?>
+
+        <form name="locacao" method="post">
+          <div class="row padding">
+            <div class="input-field col s6">
+
+              <select name="id_usuario">
+                <option value="" disabled selected>Selecione um cliente</option>
+
+
+<?php
+                include('back-end/MostrarCli.php');
+
+                 while($mostra_dados = mysql_fetch_array($pega_dados)){
+                   $cod_cliente = $mostra_dados['cod_cliente'];
+                   $nome_cliente = $mostra_dados['nome_cliente'];
+                     ?>
+                     <option value="<?=$cod_cliente?>"><?=$nome_cliente?></option>
+                     
+                     <?php
+                 }                  
+              
+                ?>
+              </select>
+              <label>Cliente</label>
             </div>
+          </div>
+
+          <div class="row padding left">
+              <input type="submit" value="Alugar" class="waves-effect waves-light btn-large ">
+
+          </div>
+
+          <input type="hidden" name="action" value="salvar_aluguel">
+          <input type="hidden" name="id_filme" value="<?=$cod_filme?>">
+        </form>
+
+        <?php            
+              break;      
+            
+            default:
+
+              break;
+          }
+
+          ?>
 
 
-       
+
+
+
         </div>
-
       </div>
 
     </div>

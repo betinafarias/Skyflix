@@ -46,7 +46,7 @@
           include('back-end/InserirCli.php');
           header('location:clientes.php');
           break;  
-        case "excluir_filme":
+        case "excluir_cliente":
           include('back-end/remocaoCliente.php');
           header('location:clientes.php');
           break;  
@@ -135,8 +135,8 @@
                 <td><?=$nome_cliente?></td>
                 <td><?=$telefone?></td>
                 <td><?=$endereco?></td>
-                <td><a class="cursor" onclick="document.filmes.action.value='excluir_filme'; document.filmes.cod_cliente.value=<?=$cod_cliente?>; filmes.submit();">Excluir</a></td>
-                <td><a class="cursor" onclick="document.filmes.action.value='alterar_filme'; document.filmes.cod_cliente.value=<?=$cod_cliente?>; filmes.submit();">Editar</a></td>
+                <td><a class="cursor" onclick="document.filmes.action.value='excluir_cliente'; document.filmes.cod_cliente.value=<?=$cod_cliente?>; filmes.submit();">Excluir</a></td>
+                <td><a class="cursor" onclick="document.filmes.action.value='alterar_cliente'; document.filmes.cod_cliente.value=<?=$cod_cliente?>; filmes.submit();">Editar</a></td>
               </tr>
 <?php
            }
@@ -149,23 +149,14 @@
 
         <br><br>
 
-
-
-
-
-
-
-
 <?php
             break;
       
-          case "alterar_filme":
+          case "alterar_cliente":
             echo 'ALTERAR FILME';
 ?><br>
 
             <form method="post" name="alterar" action="">
-
-
                 <div class="row padding">
                   <div class="input-field col s12 padding">
                     <input name="cod_cliente" type="number" class="validate" value="<?=$_POST['cod_cliente']?>">
