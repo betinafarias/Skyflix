@@ -37,7 +37,7 @@
       <div class="row">
         <div class="col s12">
          
-        <h3 class="center ">Filmes</h3><br>
+        <h3 class="center ">Clientes</h3><br>
 
         <?php
         //Switch de interfaces
@@ -48,7 +48,7 @@
           break;  
         case "excluir_filme":
           include('back-end/remocaoCliente.php');
-         // header('location:clientes.php');
+          header('location:clientes.php');
           break;  
         case "":
 ?>
@@ -161,40 +161,31 @@
 
                 <div class="row padding">
                   <div class="input-field col s12 padding">
-                    <input name="cod_filme" type="number" class="validate" value="<?=$_POST['cod_filme']?>">
-                    <label for="cod_filme">Código</label>
+                    <input name="cod_cliente" type="number" class="validate" value="<?=$_POST['cod_cliente']?>">
+                    <label for="cod_cliente">Código</label>
                   </div>
                 </div>              
                 <div class="row padding">
                   <div class="input-field col s12 padding">
-                    <input name="titulo" type="text" class="validate" >
-                    <label for="titulo">Título</label>
+                    <input name="nome_cliente" type="text" class="validate"  >
+                    <label for="nome_cliente">Nome</label>
                   </div>
                 </div>
                 <div class="row padding">
-                  <div class="input-field col s12">
-
-                    <select name="nome_categoria">
-                      <option value="" disabled selected>Selecione uma categoria</option>
-
-                      <?php
-                      include('back-end/mostrarCat.php');
-                       while($mostra_dados = mysql_fetch_array($pega_dados)){
-                           $nome_categoria= $mostra_dados['nome_categoria'];
-                           ?>
-                           <option value="<?=$nome_categoria?>"><?=$nome_categoria?></option>
-                           
-                           <?php
-                       }                  
-                                    
-                      ?>
-                    </select>
-                    <label>Categoria</label>
+                  <div class="input-field col s12 padding">
+                    <input name="endereco" type="text" class="validate">
+                    <label for="endereco">Endereço</label>
                   </div>
-                </div>
+                </div>                
+                <div class="row padding">
+                  <div class="input-field col s12 padding">
+                    <input name="telefone" type="number" class="validate">
+                    <label for="telefone">Telefone</label>
+                  </div>
+                </div>  
 
                 <div class="row padding center">
-                    <a onclick="novo_filme.submit();" class="waves-effect waves-light btn-large">Cadastrar</a>
+                    <a onclick="alterar.submit();" class="waves-effect waves-light btn-large">Alterar</a>
                 </div>
                 <input type="hidden" name="action" value="alterar">
 

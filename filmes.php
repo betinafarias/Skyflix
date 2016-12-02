@@ -25,6 +25,7 @@
   </nav>
 
   <?php
+
   if (!isset($_POST['action'])) {
     $_POST['action'] = "";
   }
@@ -36,7 +37,8 @@
       <!--   Icon Section   -->
       <div class="row">
         <div class="col s12">
-         
+         <?php
+         //var_dump($_POST);?>
         <h3 class="center ">Filmes</h3><br>
 
         <?php
@@ -49,9 +51,16 @@
         case "excluir_filme":
           include('back-end/remocaoFilme.php');
           header('location:filmes.php');
-          break;  
+          break; 
+
+        case "alterar":
+        
+         include('back-end/atualizarFil.php');
+          header('location:filmes.php');
+          break;            
         case "":
 ?>
+
 
         <form action="" method="post" name="novo_filme">
           <ul class="collapsible" data-collapsible="accordion">
@@ -199,14 +208,14 @@
                 </div>
 
                 <div class="row padding center">
-                    <a onclick="novo_filme.submit();" class="waves-effect waves-light btn-large">Cadastrar</a>
+                    <a onclick="alterar.submit();" class="waves-effect waves-light btn-large">Alterar</a>
                 </div>
                 <input type="hidden" name="action" value="alterar">
 
               <br><Br>
               <a class="cursor back" onclick="document.alterar.action.value=''; alterar.submit();"><i class=" material-icons  light-blue-text">navigate_before</i>
                Voltar</a>
-               <input type="hidden" name="action" value="">
+
             </form>
 
           <br><br>
