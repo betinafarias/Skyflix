@@ -17,6 +17,7 @@
 
     if($query == TRUE) {
       echo "Inserido com sucesso";
+      
     } else {
       echo "Erro na inserção";
     }

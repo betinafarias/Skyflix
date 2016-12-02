@@ -8,5 +8,6 @@
     <li><a href="categorias.php">Categorias</a></li>
     <li><a href="atores.php">Atores</a></li>
     <li><a href="clientes.php">Clientes</a></li>
+    <li><a href="clientes.php">Locações</a></li>
 
   </ul>

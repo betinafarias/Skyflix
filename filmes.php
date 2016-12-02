@@ -43,7 +43,14 @@
         <?php
         //Switch de interfaces
         switch (($_POST['action'])) {
-          case "":
+
+
+        case "novo_filme":
+          include('back-end/InserirFil.php');
+          header('location:filmes.php');
+          break;  
+
+        case "":
 ?>
         <form action="" method="post" name="filmes">
           <table>
@@ -73,33 +80,52 @@
         <br><br>
 
 
-        <form action="" method="post" name="filmes">
+        <form action="" method="post" name="novo_filme">
           <ul class="collapsible" data-collapsible="accordion">
             <li>
               <div class="collapsible-header teal lighten-2 white-text"><i class="material-icons">add</i>Adicionar filme</div>
               <div class="collapsible-body ">
                 <div class="row padding">
                   <div class="input-field col s12 padding">
-                    <input id="titulo" type="text" class="validate">
+                    <input name="cod_filme" type="number" class="validate">
+                    <label for="cod_filme">Código</label>
+                  </div>
+                </div>              
+                <div class="row padding">
+                  <div class="input-field col s12 padding">
+                    <input name="titulo" type="text" class="validate">
                     <label for="titulo">Título</label>
                   </div>
                 </div>
                 <div class="row padding">
                   <div class="input-field col s12">
-                    <select>
+
+
+
+                    <select name="nome_categoria">
                       <option value="" disabled selected>Selecione uma categoria</option>
-                      <option value="1">Option 1</option>
-                      <option value="2">Option 2</option>
-                      <option value="3">Option 3</option>
+
+                      <?php
+                      include('back-end/mostrarCat.php');
+
+                       while($mostra_dados = mysql_fetch_array($pega_dados)){
+                           $nome_categoria= $mostra_dados['nome_categoria'];
+                           ?>
+                           <option value="<?=$nome_categoria?>"><?=$nome_categoria?></option>
+                           
+                           <?php
+                       }                  
+                                    
+                      ?>
                     </select>
                     <label>Categoria</label>
                   </div>
                 </div>
 
                 <div class="row padding center">
-                    <a class="waves-effect waves-light btn-large">Cadastrar</a>
+                    <a onclick="novo_filme.submit();" class="waves-effect waves-light btn-large">Cadastrar</a>
                 </div>
-                
+                <input type="hidden" name="action" value="novo_filme">
 
               </div>
             </li>
@@ -114,9 +140,7 @@
 <?php
             break;
 
-          case "novo_filme":
-            # code...
-            break;        
+      
 
           case "alterar_filme":
             echo 'ALTERAR FILME';
