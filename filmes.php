@@ -25,6 +25,7 @@
   </nav>
 
   <?php
+
   if (!isset($_POST['action'])) {
     $_POST['action'] = "";
   }
@@ -50,35 +51,16 @@
           header('location:filmes.php');
           break;  
 
+
+        case "excluir_filme":
+          include('back-end/remocaoFilme.php');
+          header('location:filmes.php');
+          break;  
+
+
+
         case "":
 ?>
-        <form action="" method="post" name="filmes">
-          <table>
-            <thead>
-              <tr>
-                  <th data-field="id">Código</th>
-                  <th data-field="name">Título</th>
-                  <th data-field="price">Categoria</th>
-                  <th data-field="price">Excluir</th>
-                  <th data-field="price">Alterar</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td>Alvin</td>
-                <td>Eclair</td>
-                <td>$0.87</td>
-                <td><a class="cursor" onclick="document.filmes.action.value=''">Excluir</a></td>
-                <td><a class="cursor" onclick="document.filmes.action.value='alterar_filme'; filmes.submit();">Editar</a></td>
-              </tr>
-            </tbody>
-          </table>      
-          <input type="hidden" name="action" value="">
-        </form>
-
-        <br><br>
-
 
         <form action="" method="post" name="novo_filme">
           <ul class="collapsible" data-collapsible="accordion">
@@ -99,8 +81,6 @@
                 </div>
                 <div class="row padding">
                   <div class="input-field col s12">
-
-
 
                     <select name="nome_categoria">
                       <option value="" disabled selected>Selecione uma categoria</option>
@@ -133,6 +113,56 @@
           </ul>
         </form>
 
+        <br><br>
+
+
+
+
+        <form action="" method="post" name="filmes">
+          <table>
+            <thead>
+              <tr>
+                  <th data-field="id">Código</th>
+                  <th data-field="name">Título</th>
+                  <th data-field="price">Categoria</th>
+                  <th data-field="price">Excluir</th>
+                  <th data-field="price">Alterar</th>
+              </tr>
+            </thead>
+
+            <tbody>
+<?php
+            include('back-end/MostrarFilm.php');
+
+
+           while($mostra_dados = mysql_fetch_array($pega_dados)){
+               $cod_filme = $mostra_dados['cod_filme'];
+               $titulo  = $mostra_dados['titulo'];
+               $nome_categoria= $mostra_dados['nome_categoria'];
+?>
+
+              <tr>
+                <td><?=$cod_filme?></td>
+                <td><?=$titulo?></td>
+                <td><?=$nome_categoria?></td>
+                <td><a class="cursor" onclick="document.filmes.action.value='excluir_filme'; document.filmes.cod_filme.value=<?=$cod_filme?>; filmes.submit();">Excluir</a></td>
+                <td><a class="cursor" onclick="document.filmes.action.value='alterar_filme'; document.filmes.cod_filme.value=<?=$cod_filme?>; filmes.submit();">Editar</a></td>
+              </tr>
+<?php
+           }
+
+?>
+            </tbody>
+          </table>      
+          <input type="hidden" name="action" value="">
+          <input type="hidden" name="cod_filme" value="">
+        </form>
+
+        <br><br>
+
+
+
+
 
 
 
@@ -147,6 +177,48 @@
 ?><br>
 
             <form method="post" name="alterar" action="">
+
+
+                <div class="row padding">
+                  <div class="input-field col s12 padding">
+                    <input name="cod_filme" type="number" class="validate" value="<?=$_POST['cod_filme']?>">
+                    <label for="cod_filme">Código</label>
+                  </div>
+                </div>              
+                <div class="row padding">
+                  <div class="input-field col s12 padding">
+                    <input name="titulo" type="text" class="validate" >
+                    <label for="titulo">Título</label>
+                  </div>
+                </div>
+                <div class="row padding">
+                  <div class="input-field col s12">
+
+                    <select name="nome_categoria">
+                      <option value="" disabled selected>Selecione uma categoria</option>
+
+                      <?php
+                      include('back-end/mostrarCat.php');
+
+                       while($mostra_dados = mysql_fetch_array($pega_dados)){
+                           $nome_categoria= $mostra_dados['nome_categoria'];
+                           ?>
+                           <option value="<?=$nome_categoria?>"><?=$nome_categoria?></option>
+                           
+                           <?php
+                       }                  
+                                    
+                      ?>
+                    </select>
+                    <label>Categoria</label>
+                  </div>
+                </div>
+
+                <div class="row padding center">
+                    <a onclick="novo_filme.submit();" class="waves-effect waves-light btn-large">Cadastrar</a>
+                </div>
+                <input type="hidden" name="action" value="alterar">
+
               <br><Br>
               <a class="cursor back" onclick="document.alterar.action.value=''; alterar.submit();"><i class=" material-icons  light-blue-text">navigate_before</i>
                Voltar</a>
